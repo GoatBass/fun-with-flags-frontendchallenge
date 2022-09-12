@@ -9,12 +9,17 @@ const Dom = {
     let modalB = document.querySelector('.modal-body')
 
     //We create an array with all the borders codes of the cuntry
-    let borderArray = country.borders.splice(',')
+    let borderArray = country.borders?.splice(',')
     //And we create a span for each one with an inclick event and with the class country-border, that will get print at the end of the modealB.innerHTML 
-    let textNodes = borderArray.map(element => {
-      element = `<span onclick="Dom.clickedBorderCountry(event)" id="${element}" class="country-border">${element}</span>`
-      return element
-    })
+    let textNodes;
+    if(!borderArray){
+      textNodes = 'This country is an Island'
+    } else {
+      textNodes = borderArray.map(element => {
+        element = `<span onclick="Dom.clickedBorderCountry(event)" id="${element}" class="country-border">${element}</span>`
+        return element
+      })
+    }
 
     modalB.innerHTML = `
 
